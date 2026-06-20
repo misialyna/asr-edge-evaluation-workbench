@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+dist/
+build/
+
+# uv
+.uv/
+
+# Results (large parquet/CSV runs — keep figures and reports)
+results/runs/*.parquet
+results/runs/*.csv
+results/runs/*.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store
+
+# Tegrastats live logs (fixtures are tracked, live captures are not)
+tegrastats_live_*.log

@@ -1,0 +1,66 @@
+# Real Jetson AGX Orin run. Requires:
+#   * faster-whisper installed:  pip install 'asr-edge-evaluation-workbench[asr]'
+#   * tegrastats on PATH (or override ``telemetry.tegrastats_path``)
+#   * Common Voice Polish manifest at ``data/manifests/benchmark_manifest.jsonl``
+#
+# Run with:
+#   python -m scripts.run_benchmark --config configs/experiments/jetson_orin_default.yaml
+
+experiment:
+  name: jetson_agx_orin_pilot_v1
+  description: Polish ASR evaluation on Jetson AGX Orin (JetPack 5/6).
+  mode: jetson
+  language: pl
+  schema_version: "1.0"
+
+dataset:
+  manifest_path: data/manifests/benchmark_manifest.jsonl
+  audio_root: data
+  max_files: 20
+  shuffle: false
+  seed: 42
+
+runtime:
+  type: faster-whisper
+  configurations:
+    - id: small_int8
+      model_size: small
+      compute_type: int8
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+    - id: small_fp16
+      model_size: small
+      compute_type: float16
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+    - id: medium_fp16
+      model_size: medium
+      compute_type: float16
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+
+execution:
+  warmup_runs: 1
+  measured_runs_per_file: 3
+  inter_run_cooldown_s: 2
+  timeout_per_file_s: 600
+  fail_fast: false
+  use_fake_runtime_if_demo: false
+
+telemetry:
+  backend: tegrastats
+  interval_ms: 500
+  tegrastats_path: /usr/bin/tegrastats
+  raw_output_dir: results/runs/telemetry
+
+output:
+  results_parquet: results/runs/results.parquet
+  results_csv: results/runs/results.csv
+  report_md: results/reports/benchmark_report.md
+  figures_dir: results/figures

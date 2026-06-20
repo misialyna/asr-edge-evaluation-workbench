@@ -1,0 +1,7 @@
+id: medium_fp16
+model_size: medium
+compute_type: float16
+language: pl
+beam_size: 1
+vad_filter: false
+decode_options: {}

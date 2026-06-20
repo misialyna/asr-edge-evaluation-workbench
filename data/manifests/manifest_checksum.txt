@@ -1,0 +1,2 @@
+# SHA-256 checksum of data/manifests/benchmark_manifest.jsonl.
+# Populated by data/scripts/prepare_polish_eval.py after the manifest is written.

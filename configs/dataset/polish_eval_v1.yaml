@@ -1,0 +1,38 @@
+# Polish evaluation subset (Common Voice Polish v11.0, CC0).
+# Used by ``data/scripts/prepare_polish_eval.py`` to materialize the
+# frozen ``data/manifests/benchmark_manifest.jsonl`` and the
+# normalized 16 kHz mono WAVs in ``data/prepared/audio/``.
+#
+# We do not commit the audio corpus or the manifest; only this spec
+# and the prep script. Re-running the prep script reproduces both.
+
+dataset:
+  name: polish_eval_v1
+  version: "1.0"
+  source: mozilla-foundation/common_voice
+  source_version: "11.0"
+  language: pl
+  license: CC0-1.0
+  target_sample_rate: 16000
+  target_channels: 1
+  target_format: wav
+  selection:
+    max_clips: 20
+    min_duration_s: 2.0
+    max_duration_s: 10.0
+    prefer_clean_clips: true
+    exclude_dialects_unverified: true
+  manifest:
+    output_path: data/manifests/benchmark_manifest.jsonl
+    fields:
+      - file_id
+      - path_rel
+      - duration_s
+      - sample_rate
+      - channels
+      - reference_transcript
+      - dataset_source
+      - clip_license
+  checksum:
+    algorithm: sha256
+    output_path: data/manifests/manifest_checksum.txt

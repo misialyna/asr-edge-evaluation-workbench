@@ -1,0 +1,65 @@
+# Demo-mode experiment — runs on any developer machine, no Jetson, no model
+# weights. Use ``make demo`` to run this end-to-end. The orchestrator swaps
+# in the deterministic FakeAdapter (because ``use_fake_runtime_if_demo`` is
+# true) and uses psutil for telemetry. The result is a real
+# ``results/runs/results.parquet`` and a real ``results/reports/benchmark_report.md``
+# that the Streamlit dashboard can read.
+
+experiment:
+  name: polish_asr_demo_v1
+  description: Demo-mode run on a developer machine. Uses FakeAdapter + psutil.
+  mode: demo
+  language: pl
+  schema_version: "1.0"
+
+dataset:
+  manifest_path: data/manifests/benchmark_manifest.jsonl
+  audio_root: data
+  max_files: 20            # null = all
+  shuffle: false
+  seed: 42
+
+runtime:
+  type: faster-whisper
+  configurations:
+    - id: small_int8
+      model_size: small
+      compute_type: int8
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+    - id: small_fp16
+      model_size: small
+      compute_type: float16
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+    - id: medium_fp16
+      model_size: medium
+      compute_type: float16
+      language: pl
+      beam_size: 1
+      vad_filter: false
+      decode_options: {}
+
+execution:
+  warmup_runs: 1
+  measured_runs_per_file: 3
+  inter_run_cooldown_s: 0
+  timeout_per_file_s: 600
+  fail_fast: false
+  use_fake_runtime_if_demo: true
+
+telemetry:
+  backend: psutil
+  interval_ms: 500
+  tegrastats_path: /usr/bin/tegrastats
+  raw_output_dir: results/runs/telemetry
+
+output:
+  results_parquet: results/runs/results.parquet
+  results_csv: results/runs/results.csv
+  report_md: results/reports/benchmark_report.md
+  figures_dir: results/figures
