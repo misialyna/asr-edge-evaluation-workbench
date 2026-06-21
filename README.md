@@ -2,7 +2,7 @@
 
 Narzędzie do benchmarkowania modeli ASR (Automatic Speech Recognition) na edge hardware — zaprojektowane dla **NVIDIA Jetson Orin** z fallbackiem na zwykły sprzęt via `psutil`. Mierzy WER, CER, RTF, latencję i zużycie zasobów (RAM, GPU, temperatura, moc), po czym generuje raport Markdown i dashboard Streamlit z automatyczną rekomendacją konfiguracji.
 
-Projekt powiązany z robotem [WATUS](https://github.com/misialyna/watus_project) — workbench służył do wyznaczenia optymalnej konfiguracji Whisper dla systemu voice.
+Projekt powiązany z robotem [AIWAT (WATUS)](https://github.com/misialyna/watus_project) — workbench służył do wyznaczenia optymalnej konfiguracji Whisper dla systemu voice.
 
 ---
 
