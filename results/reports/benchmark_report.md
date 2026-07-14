@@ -1,6 +1,6 @@
 # ASR Edge Evaluation Workbench — Benchmark Report
 
-_Generated: 2026-06-20T14:07:41+00:00_
+_Generated: 2026-07-14T05:57:47+00:00_
 
 ## 1. Run metadata
 
@@ -8,26 +8,26 @@ _Generated: 2026-06-20T14:07:41+00:00_
 |---|---|
 | Project | asr-edge-evaluation-workbench |
 | Schema version | 1.0 |
-| Run timestamp (UTC) | 2026-06-20T14:06:49+00:00 |
+| Run timestamp (UTC) | 2026-07-14T05:56:55+00:00 |
 | Mode | demo |
-| Hardware | cloud-compute-tjfpt (x86_64) |
-| OS | Linux 5.10.134-18.0.11.lifsea8.x86_64 |
-| Python | 3.11.2 |
-| CPU | Intel(R) Xeon(R) Platinum (1 logical cores) |
+| Hardware | MacBook-Pro-Michalina.local (arm64) |
+| OS | Darwin 25.4.0 |
+| Python | 3.13.13 |
+| CPU | n/a (15 logical cores) |
 | GPU | n/a |
 | JetPack | n/a |
 | CUDA | n/a |
-| Git commit | n/a |
+| Git commit | 074511ccc2c6 |
 
 ## 2. Recommendation
 
-small_int8 qualifies for real-time (mean RTFx=6.27 ≥ 1.5) with the lowest WER (1.000). small_fp16 minimises the weighted score (wer=0.50, rtfx=0.30, ram=0.20). small_int8 has the lowest WER (1.000), suitable for batch / quality-first use.
+small_int8 qualifies for real-time (mean RTFx=6.20 ≥ 1.5) with the lowest WER (1.000). medium_fp16 minimises the weighted score (wer=0.50, rtfx=0.30, ram=0.20). small_int8 has the lowest WER (1.000), suitable for batch / quality-first use.
 
 | Scenario | Recommended config | WER (mean) | RTFx (mean) | Peak RAM (MB) | Peak temp (°C) |
 |---|---|---|---|---|---|
-| Real-time priority | `small_int8` | 1.000 | 6.275 | 163.582 | n/a |
-| Balanced | `small_fp16` | 1.000 | 6.278 | 163.711 | n/a |
-| Quality-first | `small_int8` | 1.000 | 6.275 | 163.582 | n/a |
+| Real-time priority | `small_int8` | 1.000 | 6.196 | 23374.641 | n/a |
+| Balanced | `medium_fp16` | 1.000 | 6.203 | 23290.406 | n/a |
+| Quality-first | `small_int8` | 1.000 | 6.196 | 23374.641 | n/a |
 
 Recommendation weights: WER=0.5 · RTFx=0.3 · RAM=0.2.
 
@@ -35,9 +35,9 @@ Recommendation weights: WER=0.5 · RTFx=0.3 · RAM=0.2.
 
 | Config | Runs | WER (mean) | WER (std) | RTFx (mean) | RTFx (std) | Peak RAM (MB) | Peak GPU (MB) | Peak T (°C) | Peak P (W) |
 |---|---|---|---|---|---|---|---|---|---|
-| `small_int8` | 10 | 1.000 | 0.000 | 6.275 | 1.530 | 163.582 | n/a | n/a | n/a |
-| `small_fp16` | 10 | 1.000 | 0.000 | 6.278 | 1.529 | 163.711 | n/a | n/a | n/a |
-| `medium_fp16` | 10 | 1.000 | 0.000 | 6.278 | 1.529 | 169.254 | n/a | n/a | n/a |
+| `small_int8` | 10 | 1.000 | 0.000 | 6.196 | 1.519 | 23374.641 | n/a | n/a | n/a |
+| `small_fp16` | 10 | 1.000 | 0.000 | 6.187 | 1.503 | 23277.391 | n/a | n/a | n/a |
+| `medium_fp16` | 10 | 1.000 | 0.000 | 6.203 | 1.499 | 23290.406 | n/a | n/a | n/a |
 
 
 ## 4. Quality vs real-time performance
